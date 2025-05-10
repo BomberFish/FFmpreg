@@ -4,11 +4,11 @@
 
 import SwiftUI
 
-@main
 struct FFmpregApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .colorScheme(.dark)
         }
     }
 }

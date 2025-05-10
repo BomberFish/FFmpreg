@@ -6,14 +6,34 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D6C53AC62DCCDD5600BEA46E /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AC32DCCDD4400BEA46E /* VideoToolbox.framework */; };
+		D6C53AC82DCCDD7D00BEA46E /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AC72DCCDD7600BEA46E /* libbz2.tbd */; };
+		D6C53ACC2DCCDD9A00BEA46E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53ACB2DCCDD9700BEA46E /* CoreMedia.framework */; };
+		D6C53AD12DCCDDE300BEA46E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AD02DCCDDDD00BEA46E /* libz.tbd */; };
+		D6C53AD32DCCDDFE00BEA46E /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AD22DCCDDEF00BEA46E /* libiconv.tbd */; };
+		D6C53B292DCEC08500BEA46E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53B282DCEC08500BEA46E /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		D6C53A902DCCDB8800BEA46E /* FFmpreg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FFmpreg.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6C53AC32DCCDD4400BEA46E /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		D6C53AC72DCCDD7600BEA46E /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		D6C53ACB2DCCDD9700BEA46E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		D6C53AD02DCCDDDD00BEA46E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D6C53AD22DCCDDEF00BEA46E /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		D6C53B282DCEC08500BEA46E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D6C53A922DCCDB8800BEA46E /* FFmpreg */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = FFmpreg;
+			sourceTree = "<group>";
+		};
+		D6C53A9E2DCCDB9F00BEA46E /* lib */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -23,6 +43,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6C53AC62DCCDD5600BEA46E /* VideoToolbox.framework in Frameworks */,
+				D6C53ACC2DCCDD9A00BEA46E /* CoreMedia.framework in Frameworks */,
+				D6C53B292DCEC08500BEA46E /* AVFoundation.framework in Frameworks */,
+				D6C53AC82DCCDD7D00BEA46E /* libbz2.tbd in Frameworks */,
+				D6C53AD12DCCDDE300BEA46E /* libz.tbd in Frameworks */,
+				D6C53AD32DCCDDFE00BEA46E /* libiconv.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,7 +58,9 @@
 		D6C53A872DCCDB8800BEA46E = {
 			isa = PBXGroup;
 			children = (
+				D6C53A9E2DCCDB9F00BEA46E /* lib */,
 				D6C53A922DCCDB8800BEA46E /* FFmpreg */,
+				D6C53ABE2DCCDD2000BEA46E /* Frameworks */,
 				D6C53A912DCCDB8800BEA46E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +71,19 @@
 				D6C53A902DCCDB8800BEA46E /* FFmpreg.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D6C53ABE2DCCDD2000BEA46E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6C53B282DCEC08500BEA46E /* AVFoundation.framework */,
+				D6C53AD22DCCDDEF00BEA46E /* libiconv.tbd */,
+				D6C53AD02DCCDDDD00BEA46E /* libz.tbd */,
+				D6C53ACB2DCCDD9700BEA46E /* CoreMedia.framework */,
+				D6C53AC72DCCDD7600BEA46E /* libbz2.tbd */,
+				D6C53AC32DCCDD4400BEA46E /* VideoToolbox.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -62,6 +103,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				D6C53A922DCCDB8800BEA46E /* FFmpreg */,
+				D6C53A9E2DCCDB9F00BEA46E /* lib */,
 			);
 			name = FFmpreg;
 			packageProductDependencies = (
@@ -82,6 +124,7 @@
 				TargetAttributes = {
 					D6C53A8F2DCCDB8800BEA46E = {
 						CreatedOnToolsVersion = 16.3;
+						LastSwiftMigration = 1630;
 					};
 				};
 			};
@@ -94,6 +137,8 @@
 			);
 			mainGroup = D6C53A872DCCDB8800BEA46E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D6C53A912DCCDB8800BEA46E /* Products */;
 			projectDirPath = "";
@@ -251,24 +296,35 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8JKVMYCRTJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+					"$(SDKROOT)/usr/lib/swift",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bomberfish.FFmpreg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = FFmpreg/C/bridged.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -279,24 +335,34 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8JKVMYCRTJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+					"$(SDKROOT)/usr/lib/swift",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bomberfish.FFmpreg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = FFmpreg/C/bridged.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
