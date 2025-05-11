@@ -152,10 +152,3 @@ class FFmpegRunner {
         return FFmpeg_main(argc, argv)
     }
 }
-
-
-extension String: @retroactive LocalizedError {
-    public var errorDescription: String? {
-        return self
-    }
-}

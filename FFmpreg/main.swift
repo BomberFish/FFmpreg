@@ -4,6 +4,7 @@
 
 import Foundation
 import SwiftUICore
+import OSLog
 
 var pipe = Pipe()
 
@@ -38,6 +39,6 @@ pipe.fileHandleForReading.readabilityHandler = { handle in
     }
 }
 
-print("App started")
+let genericLogger = Logger(subsystem: "com.bomberfish.FFmpreg", category: "generic")
 
 FFmpregApp.main()

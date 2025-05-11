@@ -6,76 +6,98 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct ContentView: View {
-    @State var arguments: String = ""
     @State var path: URL?
     @State var outFileName: String = ""
-    @State var showPicker: Bool = false
-    @State var showConsole: Bool = false
-    @State var currentType: FFmpegArgumentType = .outfile
+    @State var infile: URL = URL(fileURLWithPath: "")
+    
     @State var options: [any FFmpegArgument] = []
     @State var infileOptions: [any FFmpegArgument] = []
     @State var outfileOptions: [any FFmpegArgument] = []
-    @State var infile: URL = URL(fileURLWithPath: "")
+    
+    @State var showOptions: Bool = false
+    @State var showInOptions: Bool = false
+    @State var showOutOptions: Bool = false
+    @State var showConsole: Bool = false
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                ForEach($options, id: \.id) { $arg in
-                    ArgumentCard(arg: $arg, onDelete: {
-                        if let index = options.firstIndex(where: { $0.id == arg.id }) {
-                            withAnimation {
-                                _ = options.remove(at: index)
+        GeometryReader {geo in
+            ScrollView {
+                VStack(spacing: 20) {
+                    ForEach($options, id: \.id) { $arg in
+                        ArgumentCard(arg: $arg, onDelete: {
+                            if let index = options.firstIndex(where: { $0.id == arg.id }) {
+                                withAnimation {
+                                    _ = options.remove(at: index)
+                                }
                             }
-                        }
+                        })
+                    }
+                    Button(action: {
+                        showOptions = true
+                    }, label: {
+                        Label("FFmpeg Option", systemImage: "plus.circle.fill")
+                            .frame(maxWidth: . infinity)
                     })
-                }
-                ForEach($infileOptions, id: \.id) { $arg in
-                    ArgumentCard(arg: $arg, onDelete: {
-                        if let index = infileOptions.firstIndex(where: { $0.id == arg.id }) {
-                            withAnimation {
-                                _ = infileOptions.remove(at: index)
+                    .modifier(ButtonModifier())
+                    Divider()
+                    ForEach($infileOptions, id: \.id) { $arg in
+                        ArgumentCard(arg: $arg, onDelete: {
+                            if let index = infileOptions.firstIndex(where: { $0.id == arg.id }) {
+                                withAnimation {
+                                    _ = infileOptions.remove(at: index)
+                                }
                             }
-                        }
+                        })
+                    }
+                    Button(action: {
+                        showInOptions = true
+                    }, label: {
+                        Label("Input Option", systemImage: "plus.circle.fill")
+                            .frame(maxWidth: . infinity)
                     })
-                }
-//                Button(action: {
-//                    currentType = .infile
-//                    showPicker = true
-//                }, label: {
-//                    Label("Input Option", systemImage: "plus.circle.fill")
-//                        .frame(maxWidth: . infinity)
-//                })
-                .frame(maxWidth: .infinity)
-                .buttonStyle(.bordered)
-                .controlSize(.large)
-                .tint(.accentColor)
-                FileImportCard(path: $path)
-                ForEach($outfileOptions, id: \.id) { $arg in
-                    ArgumentCard(arg: $arg, onDelete: {
-                        if let index = outfileOptions.firstIndex(where: { $0.id == arg.id }) {
-                            withAnimation {
-                                _ = outfileOptions.remove(at: index)
+                    .modifier(ButtonModifier())
+                    Divider()
+                    FileImportCard(path: $path)
+                    ForEach($outfileOptions, id: \.id) { $arg in
+                        ArgumentCard(arg: $arg, onDelete: {
+                            if let index = outfileOptions.firstIndex(where: { $0.id == arg.id }) {
+                                withAnimation {
+                                    _ = outfileOptions.remove(at: index)
+                                }
                             }
-                        }
+                        })
+                    }
+                    Button(action: {
+                        showOutOptions = true
+                    }, label: {
+                        Label("Output Option", systemImage: "plus.circle.fill")
+                            .frame(maxWidth: . infinity)
                     })
+                    .modifier(ButtonModifier())
+                    Divider()
+                    FileExportCard(name: $outFileName)
                 }
-                Button(action: {
-                    currentType = .outfile
-                    showPicker = true
-                }, label: {
-                    Label("Output Option", systemImage: "plus.circle.fill")
-                        .frame(maxWidth: . infinity)
-                })
-                .frame(maxWidth: .infinity)
-                .buttonStyle(.bordered)
-                .controlSize(.large)
-                .tint(.accentColor)
-                FileExportCard(name: $outFileName)
+                .padding()
+                .padding(.bottom, 64)
             }
-            .padding()
+            .background(
+                RadialGradient(colors: [.init(hex: "16063C"), .init(hex: "060011")], center: .top, startRadius: 0, endRadius: geo.size.width)
+                    .ignoresSafeArea(.all)
+            )
         }
+        .scrollDismissesKeyboard(.interactively)
         .onChange(of: path) {
             outFileName = path?.lastPathComponent ?? ""
+        }
+        .overlay(alignment: .top) {
+            ZStack(alignment: .top) {
+                if UIDevice.current.hasNotch {
+                    ProgressiveBlurView(maxBlurRadius: 2, direction: .up)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 60)
+                        .ignoresSafeArea(.all, edges: .top)
+                }
+            }
         }
         .overlay(alignment: .bottom) {
             Button(action: {
@@ -90,21 +112,53 @@ struct ContentView: View {
                 }
             }, label: {
                 Label("Run", systemImage: "play.fill")
-                    .frame(maxWidth: . infinity)
+                    .frame(maxWidth: .infinity)
             })
+            .background(.ultraThinMaterial)
             .frame(maxWidth: .infinity)
             .disabled(path == nil)
             .controlSize(.large)
             .buttonStyle(.borderedProminent)
+            .cornerRadius(18)
             .padding()
-        }
-        .sheet(isPresented: $showPicker) {
-            AddCardView(args: $outfileOptions, selectedType: $currentType)
         }
         .sheet(isPresented: $showConsole) {
             ConsoleView()
+                .presentationDragIndicator(.visible)
+                .presentationCornerRadius(18)
+        }
+        .sheet(isPresented: $showOptions) {
+            AddCardView(args: $options, types: [CustomFFmpegArgument()])
+                .modifier(AddSheetModifier())
+        }
+        .sheet(isPresented: $showInOptions) {
+            AddCardView(args: $infileOptions, types: [CustomFFmpegArgument()])
+                .modifier(AddSheetModifier())
+        }
+        .sheet(isPresented: $showOutOptions) {
+            AddCardView(args: $outfileOptions, types: [CustomFFmpegArgument()])
+                .modifier(AddSheetModifier())
         }
     }
 }
 
+fileprivate struct ButtonModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity)
+            .buttonStyle(.bordered)
+            .controlSize(.large)
+            .tint(.accentColor)
+            .cornerRadius(18)
+    }
+}
 
+fileprivate struct AddSheetModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
+            .presentationBackground(.thinMaterial)
+            .presentationCornerRadius(18)
+    }
+}

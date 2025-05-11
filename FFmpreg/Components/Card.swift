@@ -23,15 +23,16 @@ struct ArgumentCard: View {
                 Spacer()
             }
             TextEditor(text: $arg.value)
-                .textEditorStyle(.automatic)
-                .frame(height: 100)
-                .cornerRadius(12)
-                .font(.body)
+                .frame(minHeight: 100)
+                .modifier(FancyInputViewModifier())
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
         }
         .padding()
         .background(.ultraThinMaterial)
         .overlay(alignment: .topTrailing) {
             Button(action: {
+                Haptic.shared.play(.soft, intensity: 0.2)
                 onDelete?()
             }) {
                 Image(systemName: "xmark.circle.fill")
@@ -66,12 +67,15 @@ struct FileImportCard: View {
             .buttonStyle(.bordered)
             .tint(.accentColor)
             .controlSize(.large)
+            .cornerRadius(14)
         }
         .padding()
         .background(.ultraThinMaterial)
         .cornerRadius(18)
         .sheet(isPresented: $showPicker) {
             DocumentImporter(filePath: $path, utTypes: [.audio, .video, .movie])
+                .presentationCornerRadius(18)
+                .presentationDragIndicator(.visible)
         }
     }
 }
@@ -87,8 +91,8 @@ struct FileExportCard: View {
                 Spacer()
             }
             TextField("Output Filename", text: $name)
-                .textFieldStyle(.roundedBorder)
-                .padding()
+                .frame(idealHeight: 32, maxHeight: 32)
+                .modifier(FancyInputViewModifier())
         }
         .padding()
         .background(.ultraThinMaterial)

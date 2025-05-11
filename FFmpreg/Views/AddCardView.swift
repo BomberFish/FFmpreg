@@ -4,32 +4,29 @@
 
 import SwiftUI
 
-// TODO: Better way of getting types
-let types: [any FFmpegArgument] = [VideoCodec(), VideoBitrate(), AudioCodec(), AudioBitrate(), VideoFilter(), AudioFilter(), CustomFFmpegArgument()]
-
 struct AddCardView: View {
     @Binding var args: [any FFmpegArgument]
-    @Binding var selectedType: FFmpegArgumentType
-    @State var filteredTypes: [any FFmpegArgument] = types
+    public var types: [any FFmpegArgument]
     @Environment(\.dismiss) var dismiss
     var body: some View {
         NavigationStack {
-            List($filteredTypes, id: \.id) { type in
+            List(types, id: \.id) { type in
                 Button(action: {
                     withAnimation {
-                        args.append(type.wrappedValue)
+                        Haptic.shared.play(.soft)
+                        args.append(type)
                     }
                     dismiss()
                 }) {
-                    HStack(spacing: 10) {
-                        Image(systemName: type.wrappedValue.icon)
+                    HStack(spacing: 12) {
+                        Image(systemName: type.icon)
                             .font(.system(size: 18))
                             .frame(width: 18)
                         VStack(alignment: .leading) {
-                            Text(type.wrappedValue.name)
+                            Text(type.name)
                                 .font(.headline)
                                 .foregroundColor(.primary)
-                            Text(type.wrappedValue.help)
+                            Text(type.help)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .lineLimit(1)
@@ -41,10 +38,8 @@ struct AddCardView: View {
             }
             .navigationTitle("Add Option")
             .navigationBarTitleDisplayMode(.inline)
-        }
-        .onChange(of: selectedType) {new in
-            filteredTypes = types.filter { $0.type == new || $0.type == .custom }
-//            print(filteredTypes)
+            .scrollContentBackground(.hidden)
+            .listRowBackground(Color.white.opacity(0.05))
         }
     }
 }
