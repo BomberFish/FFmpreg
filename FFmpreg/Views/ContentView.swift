@@ -19,6 +19,8 @@ struct ContentView: View {
     @State var showOutOptions: Bool = false
     @State var showConsole: Bool = false
     
+    @State var running = false
+    
     var body: some View {
         GeometryReader {geo in
             ScrollView {
@@ -102,6 +104,7 @@ struct ContentView: View {
         .overlay(alignment: .bottom) {
             Button(action: {
                 showConsole = true
+                running = true
                 DispatchQueue.global(qos: .background).async {
                     do {
                         let ffmpeg = FFmpegRunner(options: options, infileOptions: infileOptions, infile: path!, outfileOptions: outfileOptions, outfileName: outFileName)
@@ -109,6 +112,7 @@ struct ContentView: View {
                     } catch {
                         print("Error running FFmpeg: \(error)")
                     }
+                    running = false
                 }
             }, label: {
                 Label("Run", systemImage: "play.fill")
@@ -124,7 +128,8 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showConsole) {
             ConsoleView()
-                .presentationDragIndicator(.visible)
+                .presentationDragIndicator(running ? .hidden : .visible)
+                .interactiveDismissDisabled(running)
                 .presentationCornerRadius(18)
         }
         .sheet(isPresented: $showOptions) {
@@ -136,7 +141,7 @@ struct ContentView: View {
                 .modifier(AddSheetModifier())
         }
         .sheet(isPresented: $showOutOptions) {
-            AddCardView(args: $outfileOptions, types: [CustomFFmpegArgument()])
+            AddCardView(args: $outfileOptions, types: [VideoCodec(), VideoBitrate(), VideoFilter(), AudioCodec(), AudioBitrate(), AudioFilter(), CustomFFmpegArgument()])
                 .modifier(AddSheetModifier())
         }
     }

@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D672B2102DD21BA400B138E9 /* SwiftTerm in Frameworks */ = {isa = PBXBuildFile; productRef = D672B20F2DD21BA400B138E9 /* SwiftTerm */; };
 		D6C53AC62DCCDD5600BEA46E /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AC32DCCDD4400BEA46E /* VideoToolbox.framework */; };
-		D6C53AC82DCCDD7D00BEA46E /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AC72DCCDD7600BEA46E /* libbz2.tbd */; };
+		D6C53AC82DCCDD7D00BEA46E /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AC72DCCDD7600BEA46E /* libbz2.tbd */; platformFilter = ios; };
 		D6C53ACC2DCCDD9A00BEA46E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53ACB2DCCDD9700BEA46E /* CoreMedia.framework */; };
-		D6C53AD12DCCDDE300BEA46E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AD02DCCDDDD00BEA46E /* libz.tbd */; };
-		D6C53AD32DCCDDFE00BEA46E /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AD22DCCDDEF00BEA46E /* libiconv.tbd */; };
+		D6C53AD12DCCDDE300BEA46E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AD02DCCDDDD00BEA46E /* libz.tbd */; platformFilter = ios; };
+		D6C53AD32DCCDDFE00BEA46E /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53AD22DCCDDEF00BEA46E /* libiconv.tbd */; platformFilter = ios; };
 		D6C53B292DCEC08500BEA46E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C53B282DCEC08500BEA46E /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,26 @@
 		D6C53B282DCEC08500BEA46E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D672B2112DD22C9E00B138E9 /* Exceptions for "lib" folder in "FFmpreg" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			platformFiltersByRelativePath = {
+				libavcodec.a = (ios, );
+				libavdevice.a = (ios, );
+				libavfilter.a = (ios, );
+				libavformat.a = (ios, );
+				libavutil.a = (ios, );
+				"libfdk-aac.a" = (ios, );
+				libfftools.a = (ios, );
+				libmp3lame.a = (ios, );
+				libswresample.a = (ios, );
+				libswscale.a = (ios, );
+				libx264.a = (ios, );
+			};
+			target = D6C53A8F2DCCDB8800BEA46E /* FFmpreg */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D6C53A922DCCDB8800BEA46E /* FFmpreg */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -33,6 +54,9 @@
 		};
 		D6C53A9E2DCCDB9F00BEA46E /* lib */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D672B2112DD22C9E00B138E9 /* Exceptions for "lib" folder in "FFmpreg" target */,
+			);
 			path = lib;
 			sourceTree = "<group>";
 		};
@@ -43,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D672B2102DD21BA400B138E9 /* SwiftTerm in Frameworks */,
 				D6C53AC62DCCDD5600BEA46E /* VideoToolbox.framework in Frameworks */,
 				D6C53ACC2DCCDD9A00BEA46E /* CoreMedia.framework in Frameworks */,
 				D6C53B292DCEC08500BEA46E /* AVFoundation.framework in Frameworks */,
@@ -107,6 +132,7 @@
 			);
 			name = FFmpreg;
 			packageProductDependencies = (
+				D672B20F2DD21BA400B138E9 /* SwiftTerm */,
 			);
 			productName = FFmpreg;
 			productReference = D6C53A902DCCDB8800BEA46E /* FFmpreg.app */;
@@ -138,6 +164,7 @@
 			mainGroup = D6C53A872DCCDB8800BEA46E;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				D672B20E2DD21BA400B138E9 /* XCRemoteSwiftPackageReference "SwiftTerm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D6C53A912DCCDB8800BEA46E /* Products */;
@@ -322,6 +349,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bomberfish.FFmpreg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = FFmpreg/C/bridged.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -361,6 +391,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.bomberfish.FFmpreg;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = FFmpreg/C/bridged.h;
 				SWIFT_VERSION = 5.0;
@@ -390,6 +423,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D672B20E2DD21BA400B138E9 /* XCRemoteSwiftPackageReference "SwiftTerm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/migueldeicaza/SwiftTerm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D672B20F2DD21BA400B138E9 /* SwiftTerm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D672B20E2DD21BA400B138E9 /* XCRemoteSwiftPackageReference "SwiftTerm" */;
+			productName = SwiftTerm;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D6C53A882DCCDB8800BEA46E /* Project object */;
 }

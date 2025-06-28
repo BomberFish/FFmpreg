@@ -5,13 +5,12 @@
 import SwiftUI
 
 struct ConsoleView: View {
-    @ObservedObject var pipe = OutPipe.shared
     var body: some View {
-//        TerminalViewRepresentable(text: $pipe.output)
-        TextEditor(text: $pipe.output)
+        NavigationStack {
+            TerminalViewRepresentable()
+                .background(Color(UIColor.black))
+                .navigationTitle("Console")
+                .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
-
-//#Preview {
-//    ConsoleView()
-//}

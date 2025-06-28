@@ -10,7 +10,7 @@ extension UIScreen {
     /// Example: `RoundedRectangle(cornerRadius: UIScreen.main.cornerRadius, style: .continuous)`
     var cornerRadius: CGFloat {
         
-        /// Technically i'm not trying to sneak this past app review,
+        /// Technically I'm not trying to sneak this past app review,
         /// but I still think it's funny that this works and i also think it's super cool
         ///
         /// In general I just love experimenting with this stuff
@@ -20,7 +20,7 @@ extension UIScreen {
         ///
         /// Plus, the challenge rules say nothing about using private apis.
         ///
-        /// But still, i'll obfuscate it a bit in case you folks actually
+        /// But still, I'll obfuscate it a bit in case you folks actually
         /// do pass this thing through the same algorithm
         ///
         /// Here, i'm making a computed value in the hopes that the compiler won't optimize it into a constant that might get picked up

@@ -33,7 +33,7 @@ struct DocumentImporter: UIViewControllerRepresentable {
         }
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
             parent.filePath = urls[0]
-            print(urls[0].absoluteString)
+//            print(urls[0].absoluteString)
         }
     }
 }
@@ -65,7 +65,7 @@ struct DocumentExporter: UIViewControllerRepresentable {
         
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
             parent.filePath = urls[0]
-            print(urls[0].absoluteString)
+//            print(urls[0].absoluteString)
         }
     }
 }

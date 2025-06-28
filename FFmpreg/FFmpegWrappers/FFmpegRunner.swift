@@ -110,7 +110,7 @@ class FFmpegRunner {
         command.append(infile.path)
         command += outfileOptions
         command.append(outfile.path)
-        print("Running FFmpeg with command: \(command)")
+//        print("Running FFmpeg with command: \(command)")
         return command
     }
     
@@ -134,8 +134,8 @@ class FFmpegRunner {
             // https://developer.apple.com/documentation/foundation/nsurl/startaccessingsecurityscopedresource()
             infile.stopAccessingSecurityScopedResource()
             outfile.deletingLastPathComponent().stopAccessingSecurityScopedResource()
-            
-            // be a responsible citizen and free our memory
+                
+            // be a responsible citizen and free our memory...
             for i in 0..<argc {
                 free(argv[Int(i)])
             }
@@ -152,3 +152,15 @@ class FFmpegRunner {
         return FFmpeg_main(argc, argv)
     }
 }
+
+
+#if targetEnvironment(simulator) || targetEnvironment(macCatalyst)
+func FFmpeg_main(_ argc: Int32, _ argv: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>) -> Int32 {
+    let process = Process()
+    process.executableURL = URL(fileURLWithPath: "/usr/local/opt/ffmpeg/bin/ffmpeg")
+    process.arguments = (0..<argc).map { String(cString: argv[Int($0)]) }
+    process.standardOutput = consolePipe
+    process.standardError = consolePipe
+    process.standardInput = consolePipe
+}
+#endif
