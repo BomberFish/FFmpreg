@@ -3,7 +3,7 @@
 // created on 2025-05-08
 
 import Foundation
-import SwiftUICore
+import SwiftUI
 import OSLog
 
 //var descriptor: UnsafeMutablePointer<UnsafePointer<AVCodecDescriptor>?>?

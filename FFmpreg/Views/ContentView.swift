@@ -5,6 +5,41 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+struct GlassButtonModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 19, *) {
+            content
+                .buttonStyle(.glass)
+        } else {
+            content
+                .buttonStyle(.bordered)
+        }
+    }
+}
+
+struct GlassProminentButtonModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 19, *) {
+            content
+                .buttonStyle(.glassProminent)
+        } else {
+            content
+                .buttonStyle(.borderedProminent)
+        }
+    }
+}
+
+extension View {
+    func glassButton() -> some View {
+        modifier(GlassButtonModifier())
+    }
+    
+    func glassProminentButton() -> some View {
+        modifier(GlassProminentButtonModifier())
+    }
+}
+
+
 struct ContentView: View {
     @State var path: URL?
     @State var outFileName: String = ""
@@ -122,15 +157,14 @@ struct ContentView: View {
             .frame(maxWidth: .infinity)
             .disabled(path == nil)
             .controlSize(.large)
-            .buttonStyle(.borderedProminent)
-            .cornerRadius(18)
+            .glassProminentButton()
+            .cornerRadius(.infinity)
             .padding()
         }
         .sheet(isPresented: $showConsole) {
             ConsoleView()
                 .presentationDragIndicator(running ? .hidden : .visible)
                 .interactiveDismissDisabled(running)
-                .presentationCornerRadius(18)
         }
         .sheet(isPresented: $showOptions) {
             AddCardView(args: $options, types: [CustomFFmpegArgument()])
@@ -151,19 +185,25 @@ fileprivate struct ButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .frame(maxWidth: .infinity)
-            .buttonStyle(.bordered)
+            .glassButton()
             .controlSize(.large)
             .tint(.accentColor)
-            .cornerRadius(18)
+            .cornerRadius(.infinity)
     }
 }
 
 fileprivate struct AddSheetModifier: ViewModifier {
     func body(content: Content) -> some View {
-        content
-            .presentationDetents([.medium, .large])
-            .presentationDragIndicator(.visible)
-            .presentationBackground(.thinMaterial)
-            .presentationCornerRadius(18)
+        if #available(iOS 19.0, *) {
+            content
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+        } else {
+            content
+                .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.visible)
+                .presentationBackground(.thinMaterial)
+                .presentationCornerRadius(18)
+        }
     }
 }

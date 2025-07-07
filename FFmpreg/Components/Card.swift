@@ -4,6 +4,22 @@
 
 import SwiftUI
 
+fileprivate struct Glass: ViewModifier {
+    @Environment(\.colorScheme) private var colorScheme
+    public func body(content: Content) -> some View {
+        if #available(iOS 19.0, *) {
+            content
+                .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 32))
+        } else {
+            content
+                .background(
+                    .ultraThinMaterial
+                )
+        }
+    }
+}
+
+
 struct ArgumentCard: View {
     @Binding var arg: any FFmpegArgument
     public var onDelete: (() -> Void)?
@@ -29,7 +45,7 @@ struct ArgumentCard: View {
                 .textInputAutocapitalization(.never)
         }
         .padding()
-        .background(.ultraThinMaterial)
+        .modifier(Glass())
         .overlay(alignment: .topTrailing) {
             Button(action: {
                 Haptic.shared.play(.soft, intensity: 0.2)
@@ -42,7 +58,7 @@ struct ArgumentCard: View {
             }
             .padding()
         }
-        .cornerRadius(18)
+        .cornerRadius(24)
     }
 }
 
@@ -64,13 +80,13 @@ struct FileImportCard: View {
                     .frame(maxWidth: . infinity)
             })
             .frame(maxWidth: .infinity)
-            .buttonStyle(.bordered)
             .tint(.accentColor)
+            .glassButton()
             .controlSize(.large)
-            .cornerRadius(14)
+            .cornerRadius(.infinity)
         }
         .padding()
-        .background(.ultraThinMaterial)
+        .modifier(Glass())
         .cornerRadius(18)
         .sheet(isPresented: $showPicker) {
             DocumentImporter(filePath: $path, utTypes: [.audio, .video, .movie])
@@ -95,7 +111,7 @@ struct FileExportCard: View {
                 .modifier(FancyInputViewModifier())
         }
         .padding()
-        .background(.ultraThinMaterial)
+        .modifier(Glass())
         .cornerRadius(18)
     }
 }

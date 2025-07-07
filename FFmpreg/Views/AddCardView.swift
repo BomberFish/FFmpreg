@@ -39,7 +39,6 @@ struct AddCardView: View {
             .navigationTitle("Add Option")
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
-            .listRowBackground(Color.white.opacity(0.05))
         }
     }
 }

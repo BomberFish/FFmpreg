@@ -2,7 +2,7 @@
 // Color+hex.swift – QuickSign
 // created on 2024-08-24
 
-import SwiftUICore
+import SwiftUI
 
 extension Color {
     /// Initializes a color from a hexcode.
