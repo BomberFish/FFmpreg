@@ -65,6 +65,7 @@ struct ArgumentCard: View {
 struct FileImportCard: View {
     @Binding var path: URL?
     @State private var showPicker: Bool = false
+    @State private var showPhotos: Bool = false
     var body: some View {
         VStack {
             HStack {
@@ -73,8 +74,9 @@ struct FileImportCard: View {
                     .font(.headline)
                 Spacer()
             }
-            Button(action: {
-                showPicker = true
+            Menu(content: {
+                Button("Photo Library", systemImage: "photo.on.rectangle", action: {showPhotos = true})
+                Button("Choose File", systemImage: "folder", action: {showPicker = true})
             }, label: {
                 Label(path?.lastPathComponent ?? "Select File", systemImage: "folder")
                     .frame(maxWidth: . infinity)
@@ -90,7 +92,10 @@ struct FileImportCard: View {
         .cornerRadius(18)
         .sheet(isPresented: $showPicker) {
             DocumentImporter(filePath: $path, utTypes: [.audio, .video, .movie])
-                .presentationCornerRadius(18)
+                .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $showPhotos) {
+            ImagePickerView(imageURL: $path)
                 .presentationDragIndicator(.visible)
         }
     }

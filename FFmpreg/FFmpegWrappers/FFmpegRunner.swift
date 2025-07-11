@@ -110,7 +110,6 @@ class FFmpegRunner {
         command.append(infile.path)
         command += outfileOptions
         command.append(outfile.path)
-//        print("Running FFmpeg with command: \(command)")
         return command
     }
     
@@ -147,6 +146,8 @@ class FFmpegRunner {
             let arg = String(command[Int(i)])
             argv[Int(i)] = strdup(arg)
         }
+        
+        print("\(command.joined(separator: " "))")
         
         // run ffmpr- i mean ffmpeg
         return FFmpeg_main(argc, argv)
